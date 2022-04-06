@@ -17,7 +17,7 @@ logging.basicConfig(
 logger: logging.Logger = logging.getLogger()
 
 
-def main(host: str = "0.0.0.0", port: str = "9000", ssl_port: Optional[str] = None) -> None:
+def main(host: str = "127.0.0.1", port: str = "9000", ssl_port: Optional[str] = None) -> None:
     interceptor_list: List[BaseInterceptor] = [CustomerTopInterceptor()]
     server: grpc.server = grpc.server(
         futures.ThreadPoolExecutor(max_workers=10),

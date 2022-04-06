@@ -12,10 +12,10 @@ from user_grpc_service.helper.conn_proxy import conn_proxy
 
 class UserService(user_service.UserServicer):
     @conn_proxy()
-    def check_user_login(
+    def get_uid_by_token(
         self, request: user_message.LogoutUserRequest, context: grpc.ServicerContext
-    ) -> user_message.CheckLoginResult:
-        return user_message.CheckLoginResult(result=user_dal.check_login(uid=request.uid, token=request.token))
+    ) -> user_message.GetUidByTokenResult:
+        return user_message.GetUidByTokenResult(uid=user_dal.get_uid_by_token(token=request.token))
 
     @conn_proxy()
     def logout_user(self, request: user_message.LogoutUserRequest, context: grpc.ServicerContext) -> Empty:

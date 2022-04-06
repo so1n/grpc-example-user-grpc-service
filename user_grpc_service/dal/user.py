@@ -1,3 +1,5 @@
+from typing import Optional
+
 from typing_extensions import TypedDict
 
 from user_grpc_service.helper.conn_proxy import context_proxy
@@ -43,17 +45,17 @@ class UserDal(object):
             return user_dict
 
     @staticmethod
-    def check_login(*, uid: str, token: str) -> bool:
+    def get_uid_by_token(*, token: str) -> Optional[str]:
         with context_proxy.conn.cursor() as cursor:
             cursor.execute(
-                "SELECT * FROM user_token WHERE uid=%s AND token=%s AND deleted=0",
-                (uid, token),
+                "SELECT uid FROM user_token WHERE token=%s AND deleted=0",
+                (token,),
             )
-            return bool(cursor.fetchone())
+            return (cursor.fetchone() or {}).get("uid", None)
 
     def logout_user(self, *, uid: str, token: str) -> None:
         with context_proxy.conn.cursor() as cursor:
-            if not self.check_login(uid=uid, token=token):
+            if uid != self.get_uid_by_token(token=token):
                 raise RuntimeError("User not login")
             cursor.execute("UPDATE user_token SET deleted=1 WHERE uid=%s", (uid,))
 

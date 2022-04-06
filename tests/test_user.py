@@ -117,11 +117,11 @@ class TestUser:
         with mock_user_token(uid):
             grpc_stub.logout_user(request, metadata=[])
 
-    def test_check_login(self, grpc_stub: user_pb2_grpc.UserStub) -> None:
+    def test_get_uid_by_token(self, grpc_stub: user_pb2_grpc.UserStub) -> None:
         uid: str = "666666"
-        request: user_pb2.LogoutUserRequest = user_pb2.LogoutUserRequest(uid=uid, token="mock_token")
-        result: user_pb2.CheckLoginResult = grpc_stub.check_user_login(request, metadata=[])
-        assert not result.result
+        request: user_pb2.GetUidByTokenRequest = user_pb2.GetUidByTokenRequest(token="mock_token")
+        result: user_pb2.GetUidByTokenResult = grpc_stub.get_uid_by_token(request, metadata=[])
+        assert not result.uid
         with mock_user_token(uid):
-            result = grpc_stub.check_user_login(request, metadata=[])
-            assert result.result
+            result = grpc_stub.get_uid_by_token(request, metadata=[])
+            assert result
