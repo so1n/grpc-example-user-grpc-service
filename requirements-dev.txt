@@ -12,10 +12,13 @@ dbutils==3.0.2
 distlib==0.3.4; python_full_version >= "3.6.1"
 filelock==3.4.2; python_version >= "3.7" and python_full_version >= "3.6.1"
 flake8==3.9.2; (python_version >= "2.7" and python_full_version < "3.0.0") or (python_full_version >= "3.5.0")
-grpc-example-common @ git+ssh://git@github.com/so1n/grpc-example-common.git@v0.1.5 ; python_version >= "3.8" and python_version < "4.0"
+googleapis-common-protos==1.56.3; python_version >= "3.8" and python_version < "4.0"
+grpc-example-common @ git+ssh://git@github.com/so1n/grpc-example-common.git@v0.1.7 ; python_version >= "3.8" and python_version < "4.0"
+grpc-stubs==1.24.10; python_version >= "3.8" and python_version < "4.0"
+grpcio-status==1.47.0; python_version >= "3.8" and python_version < "4.0"
 grpcio-testing==1.43.0
 grpcio-tools==1.43.0; python_version >= "3.8" and python_version < "4.0"
-grpcio==1.43.0; python_version >= "3.8" and python_version < "4.0"
+grpcio==1.47.0; python_version >= "3.8" and python_version < "4.0"
 identify==2.4.4; python_full_version >= "3.6.1"
 iniconfig==1.1.1; python_version >= "3.6"
 isort==5.10.1; python_full_version >= "3.6.1" and python_version < "4.0"
